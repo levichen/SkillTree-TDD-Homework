@@ -1,0 +1,9 @@
+{
+  "name": "hw",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "mocha --compilers js:babel/register"
+  },
+  "author": "Levi Chen",
+  "license": "MIT"
+}
