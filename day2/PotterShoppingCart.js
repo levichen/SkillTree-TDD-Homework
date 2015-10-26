@@ -5,7 +5,7 @@ class PotterShoppingCart {
   }
 
   getPrice() {
-    return 0;
+    return this.books[0].price;
   }
 }
 
