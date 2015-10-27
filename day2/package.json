@@ -2,7 +2,8 @@
   "name": "day2",
   "version": "1.0.0",
   "scripts": {
-    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --compilers js:babel/register"
+    "test8": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --compilers js:babel/register",
+    "test": "./node_modules/mocha/bin/_mocha --compilers js:babel/register"
   },
   "author": "",
   "license": "MIT",
