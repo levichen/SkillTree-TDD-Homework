@@ -2,7 +2,6 @@
 
 class PotterShoppingCart {
   constructor() {
-    this.eachBookQTY = [];
     this.discountRate = {
       1 : 1, 
       2 : 0.95,
@@ -17,17 +16,66 @@ class PotterShoppingCart {
   }
 
   getPrice() {
-    let count = 0;
+    let self = this;
+
     let price = 0;
+    let eachBookQTY = this.getEachBookQTYList();
 
-    count  = this.books.length; 
-    price += this.books.reduce((previousBook, currentBook) => {
+    while(true) {
+      let count         = 0;
+      let disCountPrice = 0;
+
+      eachBookQTY.forEach((element, index, array) => {
+        if (element > 0) {
+          count += 1;
+        } 
+      });
+
+      if (count === 0) break;
+
+      self.books.forEach((element, index, array) => {
+        if (eachBookQTY[element.id] > 0) {
+          disCountPrice += element.price;
+          eachBookQTY[element.id] -= 1;
+        }  
+      });
+
+      console.log(eachBookQTY + ":" + disCountPrice + ":" + count + ":" + (disCountPrice * self.discountRate[count]));
+
+      price += disCountPrice * self.discountRate[count];
+
+      /*eachBookQTY = eachBookQTY.map((element) => {
+        if (element === 0) {
+          return 0;
+        } else {
+          return element - 1;
+        }
+      });*/
+    }
+
+       /*Count total price 
+    price += self.books.reduce((previousBook, currentBook) => {
       return previousBook.price + currentBook.price;
-    });
+    });*/
 
-    return this.discountRate[count] * count * 100;
+    return price;
   }
 
+  getEachBookQTYList() {
+    let eachBookQTY = [];
+
+    this.books.forEach((element, index, array) => {
+      let id = element.id;
+
+      if (eachBookQTY[id] === undefined) {
+        eachBookQTY[id] = 1;
+      } else {
+        eachBookQTY[id] += 1;
+      }
+    });
+
+    return eachBookQTY;
+  }
 }
 
 export default PotterShoppingCart;
