@@ -39,6 +39,27 @@ describe('Potter Shopping Cart Tests', () => {
     actual.should.equal(expected);
   });
 
+  it('一二三四集各買了一本，價格應為 100 * 4 * 0.8 = 320', () => {
+    // arrange 
+    var books = [
+      new Book(1, 100),
+      new Book(2, 100),
+      new Book(3, 100),
+      new Book(4, 100),
+    ];
+
+    let target = new PotterShoppingCart();
+    target.setBooks(books);
+
+    let expected = 320;
+
+    //act
+    let actual = target.getPrice();
+
+    //assert
+    actual.should.equal(expected);
+  });
+
   it('一二三集各買了一本，價格應為100 * 3 * 0.9 = 270', () => {
     // arrange 
     var books = [
