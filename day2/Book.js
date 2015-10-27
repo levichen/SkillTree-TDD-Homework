@@ -1,6 +1,6 @@
 class Book {
-  constructor(name, price) {
-    this.name  = name;
+  constructor(id, price) {
+    this.id    = id;
     this.price = price;
   }
 }
