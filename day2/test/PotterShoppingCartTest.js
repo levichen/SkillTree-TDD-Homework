@@ -122,6 +122,29 @@ describe('Potter Shopping Cart Tests', () => {
 
     //assert
     actual.should.equal(expected);
-
   });
+
+  it('第一集買了一本，第二三集各買了兩本，價格應為100 * 3 * 0.9 + 100 * 2 * 0.95 = 460', () => {
+    // arrange 
+    var books = [
+      new Book(1, 100),
+      new Book(2, 100),
+      new Book(2, 100),
+      new Book(3, 100),
+      new Book(3, 100),
+    ];
+
+    let target = new PotterShoppingCart();
+    target.setBooks(books);
+
+    let expected = 460;
+
+    //act
+    let actual = target.getPrice();
+
+    //assert
+    actual.should.equal(expected);
+  });
+
+
 });
