@@ -8,6 +8,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "babel": "^5.8.29",
     "chai": "^3.4.0",
     "istanbul": "^0.4.0",
     "mocha": "^2.3.3"

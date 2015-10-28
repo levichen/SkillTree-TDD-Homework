@@ -145,6 +145,4 @@ describe('Potter Shopping Cart Tests', () => {
     //assert
     actual.should.equal(expected);
   });
-
-
 });

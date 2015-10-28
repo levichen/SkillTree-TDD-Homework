@@ -1,5 +1,3 @@
-
-
 class PotterShoppingCart {
   constructor() {
     this.discountRate = {
