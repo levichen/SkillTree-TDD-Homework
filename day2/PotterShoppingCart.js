@@ -16,65 +16,42 @@ class PotterShoppingCart {
   }
 
   getPrice() {
-    let self = this;
-
+    let self  = this;
     let price = 0;
-    let eachBookQTY = this.getEachBookQTYList();
 
-    while(true) {
+    while (self.books.length > 0) {
+      let uniqueBooks = [];
+      let restBooks   = [];
+
+      let discountPrice = 0; 
       let count         = 0;
-      let disCountPrice = 0;
 
-      eachBookQTY.forEach((element, index, array) => {
-        if (element > 0) {
-          count += 1;
-        } 
-      });
-
-      if (count === 0) break;
-
+      //get unique books
       self.books.forEach((element, index, array) => {
-        if (eachBookQTY[element.id] > 0) {
-          disCountPrice += element.price;
-          eachBookQTY[element.id] -= 1;
-        }  
+        if (self.isUniqueBook(uniqueBooks, element)) {
+          uniqueBooks.push(element);
+          discountPrice += element.price;
+        } else {
+          restBooks.push(element);
+        }
       });
 
-      console.log(eachBookQTY + ":" + disCountPrice + ":" + count + ":" + (disCountPrice * self.discountRate[count]));
+      count  = uniqueBooks.length;
+      price += discountPrice * self.discountRate[count];
 
-      price += disCountPrice * self.discountRate[count];
-
-      /*eachBookQTY = eachBookQTY.map((element) => {
-        if (element === 0) {
-          return 0;
-        } else {
-          return element - 1;
-        }
-      });*/
+      self.books = restBooks.slice(0);
     }
-
-       /*Count total price 
-    price += self.books.reduce((previousBook, currentBook) => {
-      return previousBook.price + currentBook.price;
-    });*/
 
     return price;
   }
 
-  getEachBookQTYList() {
-    let eachBookQTY = [];
-
-    this.books.forEach((element, index, array) => {
-      let id = element.id;
-
-      if (eachBookQTY[id] === undefined) {
-        eachBookQTY[id] = 1;
-      } else {
-        eachBookQTY[id] += 1;
-      }
+  isUniqueBook(uniqueBooks, book) {
+    let ans = false;
+    ans = uniqueBooks.some((element, index, array) => {
+        return element.id === book.id;
     });
-
-    return eachBookQTY;
+    
+    return !ans;
   }
 }
 
